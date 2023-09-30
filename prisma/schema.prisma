@@ -16,41 +16,10 @@ model User {
 }
 
 model Product {
-  id   String @id @default(uuid())
-  name String @unique
-
-  productUpdates ProductUpdate[]
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
-}
-
-model ProductUpdate {
-  id          String                @id @default(uuid())
-  title       String                @unique
-  description String
-  status      PRODUCT_UPDATE_STATUS @default(UNDER_DEVELOPMENT)
-
-  productFeatures ProductFeature[]
-
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
-}
-
-model ProductFeature {
-  id          String @id @default(uuid())
-  title       String @unique
-  description String
-
-  productUpdateId String
-  productUpdate   ProductUpdate @relation(fields: [productUpdateId], references: [id])
-}
-
-enum PRODUCT_UPDATE_STATUS {
-  UNDER_DEVELOPMENT
-  IN_ALPHA_TESTING
-  IN_BETA_TESTING
-  IN_PREVIEW
-  RELEASED
-  DEPRECATED
 }
