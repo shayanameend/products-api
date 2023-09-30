@@ -1,23 +1,27 @@
 import { Router } from "express";
+import { body } from "express-validator";
+import {
+  getAllProducts,
+  getOneProduct,
+  updateProduct,
+  createProduct,
+  deleteProduct,
+} from "../handlers/product";
 
 const apiRouter = Router();
 
-apiRouter.get("products");
-apiRouter.get("products");
-apiRouter.post("products");
-apiRouter.put("products");
-apiRouter.delete("products");
-
-apiRouter.get("product-updates");
-apiRouter.get("product-updates");
-apiRouter.post("product-updates");
-apiRouter.put("product-updates");
-apiRouter.delete("product-updates");
-
-apiRouter.get("product-features");
-apiRouter.get("product-features");
-apiRouter.post("product-features");
-apiRouter.put("product-features");
-apiRouter.delete("product-features");
+apiRouter.get("products", getAllProducts);
+apiRouter.get("products/:id", getOneProduct);
+apiRouter.post(
+  "products",
+  body("name", "description").isString(),
+  createProduct
+);
+apiRouter.put(
+  "products/:id",
+  body("name", "description").isString(),
+  updateProduct
+);
+apiRouter.delete("products/:id", deleteProduct);
 
 export default apiRouter;
