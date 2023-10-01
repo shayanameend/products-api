@@ -52,7 +52,7 @@ export function enforceAuth(
 
   try {
     const user = getUserFromToken(token);
-    request.user = user as { id: string; username: string };
+    request.body.user = user as { id: string; username: string };
 
     next();
   } catch (error) {

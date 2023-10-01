@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
+import { enforceValidationErrors } from "../lib/validation";
 import {
   getAllProducts,
   getOneProduct,
@@ -10,18 +11,22 @@ import {
 
 const apiRouter = Router();
 
-apiRouter.get("products", getAllProducts);
-apiRouter.get("products/:id", getOneProduct);
+apiRouter.get("/products", getAllProducts);
+apiRouter.get("/products/:id", getOneProduct);
 apiRouter.post(
-  "products",
-  body("name", "description").isString(),
+  "/products",
+  body("name").isString(),
+  body("description").isString(),
+  enforceValidationErrors,
   createProduct
 );
 apiRouter.put(
-  "products/:id",
-  body("name", "description").isString(),
+  "/products/:id",
+  body("name").isString(),
+  body("description").isString(),
+  enforceValidationErrors,
   updateProduct
 );
-apiRouter.delete("products/:id", deleteProduct);
+apiRouter.delete("/products/:id", deleteProduct);
 
 export default apiRouter;

@@ -3,7 +3,6 @@ import cors from "cors";
 import morgan from "morgan";
 import { authRouter, apiRouter } from "./routers";
 import { enforceAuth } from "./lib/auth";
-import { enforceValidationErrors } from "./lib/validation";
 
 const app = express();
 
@@ -13,6 +12,6 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use("/auth", authRouter);
-app.use("/api", enforceAuth, enforceValidationErrors, apiRouter);
+app.use("/api", enforceAuth, apiRouter);
 
 export default app;
