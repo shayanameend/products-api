@@ -15,6 +15,7 @@ if (NODE_ENV === "PRODUCTION") {
 const defaultConfig = {
   dbUrl: process.env.DATABASE_URL,
   jwtSecret: process.env.JWT_SECRET,
+  port: process.env.PORT
 };
 
 export default merge(defaultConfig, envConfig);
